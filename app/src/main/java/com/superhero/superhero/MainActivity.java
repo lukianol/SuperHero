@@ -1,5 +1,6 @@
 package com.superhero.superhero;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,19 +22,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (new IdentityManager().isLoggedIn()) {
-            navigateToHelp();
-        } else {
-            setContentView(R.layout.activity_main);
-            this.setupFacebookClick();
-        }
-    }
-
-    private void navigateToHelp() {
-        Intent intent = new Intent(this, HelpActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        setContentView(R.layout.activity_main);
+        setupFacebookClick();
     }
 
     private void setupFacebookClick(){
@@ -41,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         loginButton = findViewById(R.id.login_button);
 
+        final Activity this_ = this;
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                navigateToHelp();
+                new NavigationManager().navigateTo(this_, HelpActivity.class);
             }
 
             @Override
