@@ -18,12 +18,11 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         final EditText titleEntered = findViewById(R.id.title_entered);
-        final EditText descEntered = findViewById(R.id.description_entered);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,17 +48,6 @@ public class HelpActivity extends AppCompatActivity {
                 });
 
                 thread.start();
-
-
-
-
-
-
-
-                //ApiClientFactory factory = new ApiClientFactory();
-
-//                com.superhero.clientsdk.HelpApiClient client = new HelpApiClient() {
-//                }
 
             }
         });
