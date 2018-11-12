@@ -22,6 +22,17 @@
             android:layout_height="36dp"
             android:text="Provide short title" />
 
+
+        <EditText
+            android:id="@+id/title_entered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="I need kisses"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="237dp" />
+
         <TextView
             android:id="@+id/description"
             android:layout_width="374dp"
@@ -30,22 +41,15 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="132dp" />
 
-
-        <EditText
-            android:id="@+id/title_entered"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:ems="10"
-            android:inputType="text"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="237dp" />
-
         <EditText
             android:id="@+id/description_entered"
             android:layout_width="match_parent"
-            android:layout_height="342dp"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:gravity="top"
+            android:hint="Carving for them"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="56dp" />
 
