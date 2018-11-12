@@ -1,18 +1,14 @@
 package com.superhero.superhero;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -26,50 +22,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        info = (TextView) findViewById(R.id.info);
-
-        boolean useFacebookClick = false;
-
-        if (useFacebookClick) {
-            this.setupFacebookClick();
+        if (new IdentityManager().isLoggedIn()) {
+            navigateToHelp();
         } else {
-            this.setupSimpleClick();
+            setContentView(R.layout.activity_main);
+            this.setupFacebookClick();
         }
     }
 
-    private void navigateToScreen(Class<?> activity) {
-        Intent intent = new Intent(this, activity);
+    private void navigateToHelp() {
+        Intent intent = new Intent(this, HelpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
-    private void setupSimpleClick(){
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToScreen(HelpActivity.class);
-            }
-        });
-
-    }
-
     private void setupFacebookClick(){
-        FacebookSdk.sdkInitialize(getApplicationContext());
-
+        info = findViewById(R.id.info);
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
-                );
+                navigateToHelp();
             }
 
             @Override
@@ -82,5 +57,11 @@ public class MainActivity extends AppCompatActivity {
                 info.setText("Login attempt failed.");
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
