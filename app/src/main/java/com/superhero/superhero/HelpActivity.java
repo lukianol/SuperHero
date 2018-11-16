@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.amazonaws.http.HttpMethodName;
 import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
@@ -23,6 +24,7 @@ public class HelpActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         final EditText titleEntered = findViewById(R.id.title_entered);
+        final HelpActivity this_ = this;
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +36,13 @@ public class HelpActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try  {
+                            this_.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(this_.getBaseContext(), "Your request couldn't be submitted", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+
                             ApiClientFactory factory = new ApiClientFactory();
                             HelpApiClient client = factory.build(HelpApiClient.class);
                             ApiRequest request = new ApiRequest();
@@ -41,8 +50,9 @@ public class HelpActivity extends AppCompatActivity {
                             request.addHeader("Test", titleEntered.getText().toString());
                             request.withPath("/");
                             client.execute(request);
-                        } catch (Exception e) {
+                        } catch (Throwable e) {
                             e.printStackTrace();
+
                         }
                     }
                 });
