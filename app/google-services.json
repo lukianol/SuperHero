@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1060841639343",
+    "firebase_url": "https://superhero-e348f.firebaseio.com",
+    "project_id": "superhero-e348f",
+    "storage_bucket": "superhero-e348f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060841639343:android:837ca8e0744cf4e1",
+        "android_client_info": {
+          "package_name": "com.superhero.superhero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060841639343-7mk5q2k5ijjnrrdgjl8fl8hnsr2884n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo_wL1-R2CTfATJxNogQb3JwjhGVCIdQI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
